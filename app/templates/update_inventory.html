@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/update/inventory/{{ inventory.id }}" method="post">
+                        <div class="form-group">
+                            <select class="form-control" name="product_id" id="Product" placeholder="{{inventory.product_id}}" required>
+                                {% for product in products %}
+                                    {% if inventory.product_id == product.id %}
+                                    <option value={{product.id}} selected>{{product.product_name}}</option>
+                                    {% else %}
+                                    <option value={{product.id}}>{{product.product_name}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" name="warehouse_id" id="Warehouse" placeholder="{{inventory.warehouse_id}}" required>
+                                {% for warehouse in warehouses %}
+                                    {% if inventory.warehouse_id == warehouse.id %}
+                                    <option value={{warehouse.id}} selected>{{warehouse.name}}</option>
+                                    {% else %}
+                                    <option value={{warehouse.id}}>{{warehouse.name}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="number" name="qty" placeholder="Quantity" value="{{ inventory.qty }}" required>
+                        </div>
+                        <button class="btn btn-primary" type="submit">
+                            Update
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
